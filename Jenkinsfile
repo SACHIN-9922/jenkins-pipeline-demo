@@ -2,16 +2,20 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('Checkout Code') {
             steps {
-                echo 'Code fetched from GitHub'
+                echo 'Fetching latest code from GitHub'
+                checkout scm
             }
         }
 
-        stage('Deploy Webpage') {
+        stage('Deploy Webpage using Docker') {
             steps {
                 sh '''
+                echo "Stopping old container (if any)"
                 docker rm -f simple-website || true
+
+                echo "Starting new container"
                 docker run -d \
                   --name simple-website \
                   -p 8081:80 \
@@ -19,6 +23,15 @@ pipeline {
                   nginx
                 '''
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'Deployment successful 🚀'
+        }
+        failure {
+            echo 'Deployment failed ❌'
         }
     }
 }
