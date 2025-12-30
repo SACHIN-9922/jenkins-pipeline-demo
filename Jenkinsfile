@@ -4,26 +4,22 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo 'Code checked out successfully'
+                echo 'Code fetched from GitHub'
             }
         }
 
-        stage('Build') {
+        stage('Deploy Webpage') {
             steps {
-                echo 'Building the application'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                echo 'Running tests'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Deploying application'
+                sh '''
+                docker rm -f simple-website || true
+                docker run -d \
+                  --name simple-website \
+                  -p 8081:80 \
+                  -v $(pwd):/usr/share/nginx/html \
+                  nginx
+                '''
             }
         }
     }
 }
+
