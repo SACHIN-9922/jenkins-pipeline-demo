@@ -1,11 +1,107 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Sachin | DevOps Demo</title>
+    <meta charset="UTF-8">
+    <title>Sachin Singh | CI/CD Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 700px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #00e6ff;
+        }
+
+        h2 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .tech {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .tech span {
+            background: rgba(0, 230, 255, 0.2);
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid #00e6ff;
+        }
+
+        .footer {
+            font-size: 0.85rem;
+            opacity: 0.85;
+        }
+
+        .footer strong {
+            color: #00e6ff;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello Now webhook is updated  with ngrok</h1>
-    <h2>Hosted by Rajan Verma</h2>
-    <p>This page is deployed using Docker & Jenkins.</p>
+
+    <div class="container">
+        <h1>🚀 CI/CD Pipeline Live</h1>
+        <h2>Automatically Deployed Web Application</h2>
+
+        <p>
+            This webpage is deployed automatically using a complete CI/CD pipeline.
+            Any code change pushed to GitHub triggers Jenkins, builds a Docker image,
+            and redeploys this site using Nginx.
+        </p>
+
+        <div class="tech">
+            <span>GitHub</span>
+            <span>GitHub Webhooks</span>
+            <span>Jenkins</span>
+            <span>Docker</span>
+            <span>Nginx</span>
+            <span>CI/CD</span>
+        </div>
+
+        <div class="footer">
+            Built by <strong>Sachin Singh</strong> | DevOps CI/CD Project
+        </div>
+    </div>
+
 </body>
 </html>
+
