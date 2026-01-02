@@ -8,12 +8,10 @@ pipeline {
             }
         }
 
-        stage('Prepare Files') {
+        stage('Build Docker Image') {
             steps {
                 sh '''
-                rm -rf /tmp/website
-                mkdir -p /tmp/website
-                cp index.html /tmp/website/
+                docker build -t sachin-nginx .
                 '''
             }
         }
@@ -26,8 +24,7 @@ pipeline {
                 docker run -d \
                   --name simple-website \
                   -p 8081:80 \
-                  -v /tmp/website:/usr/share/nginx/html:ro \
-                  nginx
+                  sachin-nginx
                 '''
             }
         }
