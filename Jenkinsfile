@@ -4,22 +4,29 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                echo 'Fetching latest code from GitHub'
                 checkout scm
             }
         }
 
-        stage('Deploy Webpage using Docker') {
+        stage('Prepare Files') {
             steps {
                 sh '''
-                echo "Stopping old container (if any)"
+                rm -rf /tmp/website
+                mkdir -p /tmp/website
+                cp index.html /tmp/website/
+                '''
+            }
+        }
+
+        stage('Deploy Webpage') {
+            steps {
+                sh '''
                 docker rm -f simple-website || true
 
-                echo "Starting new container"
                 docker run -d \
                   --name simple-website \
                   -p 8081:80 \
-                  -v $(pwd):/usr/share/nginx/html \
+                  -v /tmp/website:/usr/share/nginx/html:ro \
                   nginx
                 '''
             }
@@ -28,10 +35,10 @@ pipeline {
 
     post {
         success {
-            echo 'Deployment successful 🚀'
+            echo "Deployment successful"
         }
         failure {
-            echo 'Deployment failed ❌'
+            echo "Deployment failed"
         }
     }
 }
