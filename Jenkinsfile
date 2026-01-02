@@ -19,8 +19,10 @@ pipeline {
         stage('Deploy Webpage') {
             steps {
                 sh '''
-                docker rm -f simple-website || true
+                echo "Stopping any container using port 8081"
+                docker ps -q --filter "publish=8081" | xargs -r docker rm -f
 
+                echo "Starting new container"
                 docker run -d \
                   --name simple-website \
                   -p 8081:80 \
